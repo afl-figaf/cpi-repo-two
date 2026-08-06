@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       run_all:
-        description: 'Run lint + tests on all iFlows'
+        description: 'Run CPIlint + tests on all iFlows'
         type: boolean
         default: true
 
@@ -217,6 +217,7 @@ jobs:
               else
                 outcome=":x:"
                 hadFailure=1
+                logUrl="${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/$integrationFlowDir/pipeline-validation.txt"
                 msg=""
                 resultsDir="$integrationFlowDir/build/test-results/test"
                 if ls "$resultsDir"/*.xml >/dev/null 2>&1; then
@@ -227,9 +228,9 @@ jobs:
                     | sed -E 's/\|/\\|/g' | tr -s ' ' | cut -c1-200)
                 fi
                 if [ -n "$msg" ]; then
-                  details="$msg ([report]($reportUrl))"
+                  details="$msg ([log]($logUrl))"
                 else
-                  details="[report]($reportUrl)"
+                  details="[log]($logUrl)"
                 fi
               fi
 
@@ -241,6 +242,8 @@ jobs:
           if [ "$testRan" = "1" ]; then
             {
               echo "## Unit test results"
+              echo ""
+              echo "Full test report: [download]($reportUrl)"
               echo ""
               echo "| Package | iFlow | Version | Unit Tests Outcome | Details |"
               echo "|:---:|:---:|:---:|:---:|:---|"
