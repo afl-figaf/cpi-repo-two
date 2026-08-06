@@ -1,0 +1,58 @@
+{
+  "input" : {
+    "headers" : {
+      "CamelHttpUrl" : "http://21e18570trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com:443/http/new-test",
+      "SAP_TRACE_HEADER_1785496840711_MessageType" : "STEP",
+      "CamelHttpMethod" : "POST",
+      "CamelServletContextPath" : "/new-test",
+      "SAP_MessageProcessingLogID" : "AGpshQj-Ymkt69khneBQIZ4WEwRg",
+      "SAP_TRACE_HEADER_1785496840711_Truncated" : "false"
+    },
+    "properties" : {
+      "SAP_InboundMessageSizeInKB" : "1",
+      "SAP_InboundAttachmentsSizeInKB" : "0",
+      "SAP_MessageProcessingLogConfiguration" : "MplConfiguration [persistOnlyOnIntermediateError=false, mplActive=true, logLevel=TRACE, logLevelReplication=NONE, archivingConfig=ArchivingConfiguration [isArchivePersistStepsActive=false, isArchiveAttachmentsActive=false, isArchiveSenderMessagesActive=false, isArchiveReceiverMessagesActive=false], isFinal=true, tenantPlan=null]",
+      "SAP_AuthHeaderName" : "Proxy-Authorization",
+      "SAP_RunId" : "AGpshQj11Np9ekiWqcXiKbzcGwu7",
+      "SAP_AuthHeaderValue" : "com.sap.it.rt.scc.connectivity.service.principal.propagator.impl.CFPrincipalToken@58facad4",
+      "SAP_MonitoringStateProperties" : "{com.sap.it.op.mpl.TypedMessageProcessingLogKey@7e6a0aaf=CallActivity_5, com.sap.it.op.mpl.TypedMessageProcessingLogKey@ab2127fd=E5F3C4D7AEEC533-0000000000000001}",
+      "SAP_XDSR_SAPPASSPORT" : "DsrPassport{traceFlags=0, componentName='CPI_21e18570trial', service=0, userId='', action='MessageReception', actionType=NO_ACTION, prevComponentName='CPI_21e18570trial', transactionId=617e168a-f6b8-4622-b51f-69caf7e35058, clientNumber='n/a', componentType=22, rootContextId=617e168a-f6b8-4622-b51f-69caf7e35058, connectionId=4e40165a-868c-4e02-af14-4cb5b54ec814, connectionCounter=1, varPartItems=null}",
+      "SAP_MPL_LogLevel_Overall" : "TRACE",
+      "StatusProvider_CAMEL_E5F3C4D7AEEC533-0000000000000001" : "StatusProvider [status=com.sap.it.op.mpl.message.status.ProcessingStatus@7e4e9c44]",
+      "SAP_MessageProcessingLogID" : "AGpshQj-Ymkt69khneBQIZ4WEwRg",
+      "SAP_InspectModelStepId345" : "MessageFlow_4",
+      "SAP_MPL_LogLevel_Internal" : "TRACE",
+      "SAP_MPL_LogLevel_External" : "NONE",
+      "CamelToEndpoint" : "sap-size-limit://limit?attachments=&body=41943040"
+    },
+    "body" : "test message"
+  },
+  "output" : {
+    "headers" : {
+      "CamelHttpUrl" : "http://21e18570trial.it-cpitrial05-rt.cfapps.us10-001.hana.ondemand.com:443/http/new-test",
+      "SAP_TRACE_HEADER_1785496841343_MessageType" : "STEP",
+      "SAP_TRACE_HEADER_1785496841343_Truncated" : "false",
+      "CamelHttpMethod" : "POST",
+      "CamelServletContextPath" : "/new-test",
+      "SAP_MessageProcessingLogID" : "AGpshQj-Ymkt69khneBQIZ4WEwRg"
+    },
+    "properties" : {
+      "SAP_InboundMessageSizeInKB" : "1",
+      "SAP_InboundAttachmentsSizeInKB" : "0",
+      "SAP_MessageProcessingLogConfiguration" : "MplConfiguration [persistOnlyOnIntermediateError=false, mplActive=true, logLevel=TRACE, logLevelReplication=NONE, archivingConfig=ArchivingConfiguration [isArchivePersistStepsActive=false, isArchiveAttachmentsActive=false, isArchiveSenderMessagesActive=false, isArchiveReceiverMessagesActive=false], isFinal=true, tenantPlan=null]",
+      "SAP_AuthHeaderName" : "Proxy-Authorization",
+      "SAP_RunId" : "AGpshQj11Np9ekiWqcXiKbzcGwu7",
+      "SAP_AuthHeaderValue" : "com.sap.it.rt.scc.connectivity.service.principal.propagator.impl.CFPrincipalToken@58facad4",
+      "SAP_MonitoringStateProperties" : "{com.sap.it.op.mpl.TypedMessageProcessingLogKey@7e6a0aaf=EndEvent_2, com.sap.it.op.mpl.TypedMessageProcessingLogKey@ab2127fd=E5F3C4D7AEEC533-0000000000000001}",
+      "SAP_XDSR_SAPPASSPORT" : "DsrPassport{traceFlags=0, componentName='CPI_21e18570trial', service=0, userId='', action='MessageReception', actionType=NO_ACTION, prevComponentName='CPI_21e18570trial', transactionId=617e168a-f6b8-4622-b51f-69caf7e35058, clientNumber='n/a', componentType=22, rootContextId=617e168a-f6b8-4622-b51f-69caf7e35058, connectionId=4e40165a-868c-4e02-af14-4cb5b54ec814, connectionCounter=1, varPartItems=null}",
+      "SAP_MPL_LogLevel_Overall" : "TRACE",
+      "StatusProvider_CAMEL_E5F3C4D7AEEC533-0000000000000001" : "StatusProvider [status=com.sap.it.op.mpl.message.status.ProcessingStatus@7e4e9c44]",
+      "SAP_MessageProcessingLogID" : "AGpshQj-Ymkt69khneBQIZ4WEwRg",
+      "SAP_InspectModelStepId345" : "CallActivity_5",
+      "SAP_MPL_LogLevel_Internal" : "TRACE",
+      "SAP_MPL_LogLevel_External" : "NONE",
+      "CamelToEndpoint" : "sap-size-limit://limit?attachments=&body=41943040"
+    },
+    "body" : "test message-success"
+  }
+}
