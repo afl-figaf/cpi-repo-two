@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       run_all:
-        description: 'Run CPIlint + unit tests on all iFlows'
+        description: 'Run lint + tests on all iFlows'
         type: boolean
         default: true
 
@@ -160,11 +160,24 @@ jobs:
             fi
           done
 
+      - name: Upload test reports
+        id: upload
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            **/build/reports/tests/**
+            **/build/test-results/**
+          if-no-files-found: warn
+
       - name: Build validation summary
         if: always()
         shell: bash
         run: |
           runUrl="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          reportUrl="${{ steps.upload.outputs.artifact-url }}"
+          [ -z "$reportUrl" ] && reportUrl="$runUrl"
           hadFailure=0
           testRan=0
           rows=""
@@ -204,7 +217,6 @@ jobs:
               else
                 outcome=":x:"
                 hadFailure=1
-                logUrl="${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/$integrationFlowDir/pipeline-validation.txt"
                 msg=""
                 resultsDir="$integrationFlowDir/build/test-results/test"
                 if ls "$resultsDir"/*.xml >/dev/null 2>&1; then
@@ -215,9 +227,9 @@ jobs:
                     | sed -E 's/\|/\\|/g' | tr -s ' ' | cut -c1-200)
                 fi
                 if [ -n "$msg" ]; then
-                  details="$msg ([log]($logUrl))"
+                  details="$msg ([report]($reportUrl))"
                 else
-                  details="[log]($logUrl)"
+                  details="[report]($reportUrl)"
                 fi
               fi
 
@@ -238,16 +250,6 @@ jobs:
           fi
 
           echo "$hadFailure" > /tmp/hadFailure
-
-      - name: Upload test reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-reports
-          path: |
-            **/build/reports/tests/**
-            **/build/test-results/**
-          if-no-files-found: warn
 
       - name: Commit and push changes
         run: |
