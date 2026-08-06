@@ -1,0 +1,276 @@
+name: Figaf Pipeline
+
+on:
+  push:
+    branches:
+      - 'cpi-figaf'
+  workflow_dispatch:
+    inputs:
+      run_all:
+        description: 'Run CPIlint + unit tests on all iFlows'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+env:
+  # Set to 'true' to make the job fail (red X) when any CPI Lint or unit-test
+  # validation fails. Leave 'false' to keep the current record-only behaviour.
+  FAIL_ON_ERROR: 'false'
+
+jobs:
+  figaf-validations:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Download and extract CPI Lint
+        run: |
+          curl -L -o cpilint.zip https://github.com/mwittrock/cpilint/releases/download/v1.1.0/cpilint-1.1.0.zip
+          unzip -o cpilint.zip
+          rm cpilint.zip
+          chmod +x cpilint-1.1.0/bin/cpilint
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 7.4
+
+      - name: Get changed IFlow directories
+        shell: bash
+        run: |
+          # Package roots that hold Integration Suite content. Anything else in the
+          # repo (tooling, cpilint download, common test module) is ignored.
+          packageRoots="FigafIRTinfrastructure FigafJiraIntegration NewPackage com.sap.integration.dsi"
+
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.run_all }}" = "true" ]; then
+            # Manual run: enumerate EVERY iFlow across the known package roots.
+            echo "Manual run_all dispatch: selecting all iFlows."
+            changedIflowDirs=$(
+              for root in $packageRoots; do
+                [ -d "$root/IntegrationFlow" ] && find "$root/IntegrationFlow" -mindepth 1 -maxdepth 1 -type d
+              done | grep -E '/IntegrationFlow/[^/]+$' | sort | uniq || true
+            )
+          else
+            # Push (or manual run with run_all=false): only what changed in the last commit.
+            changedIflowDirs=$(git diff --name-only --diff-filter=d HEAD^ | grep -E '.*/IntegrationFlow/[^/]+' | awk -F/ '{print $1"/"$2"/"$3}' | sort | uniq || true)
+          fi
+
+          echo "Changed IFlow Directories: $changedIflowDirs"
+
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "changedIflowDirs<<$EOF" >> ${GITHUB_ENV}
+          echo "${changedIflowDirs}" >> ${GITHUB_ENV}
+          echo "$EOF" >> ${GITHUB_ENV}
+
+      - name: CPI Lint validation
+        run: |
+          if [ -z "${{ env.changedIflowDirs }}" ]; then
+            echo "No IFlow changes detected, skipping CPI Lint validation"
+            exit 0
+          fi
+
+          readarray -t changedIflowDirs <<< "${{ env.changedIflowDirs }}"
+
+          for integrationFlowDir in "${changedIflowDirs[@]}"
+          do
+            echo "integrationFlowDir: $integrationFlowDir"
+            iflowName="$(basename "$integrationFlowDir")"
+            packageName="$(basename "$(dirname "$(dirname "$integrationFlowDir")")")"
+
+            cpilintCommand="${{ github.workspace }}/cpilint-1.1.0/bin/cpilint -rules ${{ github.workspace }}/.github/workflows/cpilint.xml -unpacked-files \"$integrationFlowDir\" -skipvercheck"
+            echo "Executing cpilint: $cpilintCommand"
+            cpilintStatus=0
+            output=$(eval $cpilintCommand 2>&1) || cpilintStatus=$?
+
+            if [ -z "$cpilintStatus" ]; then
+              cpilintStatus=0
+            fi
+
+            echo "CPI Lint output: $output"
+            echo "CPI Lint exit code: $cpilintStatus"
+
+            echo "Validation name: CPI Lint" > "$integrationFlowDir/pipeline-validation.txt"
+            echo "Execution time: $(date +'%Y-%m-%d %H:%M:%S')" >> "$integrationFlowDir/pipeline-validation.txt"
+            echo "Exit code: $cpilintStatus" >> "$integrationFlowDir/pipeline-validation.txt"
+            echo -e "Output: $output\n" >> "$integrationFlowDir/pipeline-validation.txt"
+          done
+
+      - name: Run unit tests
+        run: |
+          if [ -z "${{ env.changedIflowDirs }}" ]; then
+            echo "No IFlow changes detected, skipping Unit tests validation"
+            exit 0
+          fi
+
+          readarray -t changedIflowDirs <<< "${{ env.changedIflowDirs }}"
+
+          for integrationFlowDir in "${changedIflowDirs[@]}"
+          do
+            iflowName="$(basename "$integrationFlowDir")"
+            packageName="$(basename "$(dirname "$(dirname "$integrationFlowDir")")")"
+
+            hasTests=$(find "$integrationFlowDir" -path '*/src/test/*' \( -name '*.groovy' -o -name '*.java' \) 2>/dev/null | head -n1)
+            if [ -z "$hasTests" ]; then
+              echo "No unit tests found for $iflowName, skipping unit tests"
+              continue
+            fi
+
+            runTestsCommand="gradle :$packageName:iflow-$iflowName:test"
+            echo "Executing runTestsCommand: $runTestsCommand"
+            runTestsStatus=0
+            output=$(eval $runTestsCommand 2>&1) || runTestsStatus=$?
+            if [ -z "$runTestsStatus" ]; then
+              runTestsStatus=0
+            fi
+            echo "Unit tests output: $output"
+            echo "Unit tests exit code: $runTestsStatus"
+
+            echo "Validation name: Unit tests" >> "$integrationFlowDir/pipeline-validation.txt"
+            echo "Execution time: $(date +'%Y-%m-%d %H:%M:%S')" >> "$integrationFlowDir/pipeline-validation.txt"
+            echo "Exit code: $runTestsStatus" >> "$integrationFlowDir/pipeline-validation.txt"
+            echo -e "Output: $output\n" >> "$integrationFlowDir/pipeline-validation.txt"
+
+            # On failure, append the decoded assertion(s) from the JUnit XML so the
+            # committed log contains the full, readable Groovy test error.
+            if [ "$runTestsStatus" != "0" ]; then
+              resultsDir="$integrationFlowDir/build/test-results/test"
+              if ls "$resultsDir"/*.xml >/dev/null 2>&1; then
+                echo "Failure details:" >> "$integrationFlowDir/pipeline-validation.txt"
+                { grep -ho 'message="[^"]*"' "$resultsDir"/*.xml || true; } | while read -r line; do
+                  printf '%s' "$line" \
+                    | sed -E 's/^message="//; s/"$//' \
+                    | sed -E 's/&#10;/\n/g; s/&#9;/\t/g; s/&quot;/"/g; s/&apos;/'"'"'/g; s/&lt;/</g; s/&gt;/>/g; s/&amp;/\&/g' \
+                    >> "$integrationFlowDir/pipeline-validation.txt"
+                  echo "" >> "$integrationFlowDir/pipeline-validation.txt"
+                done
+                echo "" >> "$integrationFlowDir/pipeline-validation.txt"
+              fi
+            fi
+          done
+
+      - name: Build validation summary
+        if: always()
+        shell: bash
+        run: |
+          runUrl="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          hadFailure=0
+          testRan=0
+          rows=""
+
+          if [ -n "${{ env.changedIflowDirs }}" ]; then
+            readarray -t changedIflowDirs <<< "${{ env.changedIflowDirs }}"
+            for integrationFlowDir in "${changedIflowDirs[@]}"; do
+              iflowName="$(basename "$integrationFlowDir")"
+              packageName="$(basename "$(dirname "$(dirname "$integrationFlowDir")")")"
+              valFile="$integrationFlowDir/pipeline-validation.txt"
+
+              # Track CPI Lint failures for the optional gate (not shown in this table).
+              if [ -f "$valFile" ]; then
+                lintCode=$(awk '/Validation name: CPI Lint/{f=1} f&&/Exit code:/{print $3; exit}' "$valFile")
+                [ -n "$lintCode" ] && [ "$lintCode" != "0" ] && hadFailure=1
+              fi
+
+              # Only iFlows that actually ran a unit test appear in this table.
+              if [ ! -f "$valFile" ] || ! grep -q 'Validation name: Unit tests' "$valFile"; then
+                continue
+              fi
+              testRan=1
+              testCode=$(awk '/Validation name: Unit tests/{f=1} f&&/Exit code:/{print $3; exit}' "$valFile")
+              [ -z "$testCode" ] && testCode=0
+
+              # iFlow version = Bundle-Version from the manifest (same value as CPI's Version column).
+              version="—"
+              mf="$integrationFlowDir/META-INF/MANIFEST.MF"
+              if [ -f "$mf" ]; then
+                v=$(awk -F': ' '/^Bundle-Version:/{print $2; exit}' "$mf" | tr -d '\r')
+                [ -n "$v" ] && version="$v"
+              fi
+
+              if [ "$testCode" = "0" ]; then
+                outcome=":white_check_mark:"
+                details="—"
+              else
+                outcome=":x:"
+                hadFailure=1
+                logUrl="${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/$integrationFlowDir/pipeline-validation.txt"
+                msg=""
+                resultsDir="$integrationFlowDir/build/test-results/test"
+                if ls "$resultsDir"/*.xml >/dev/null 2>&1; then
+                  msg=$( { grep -ho 'message="[^"]*"' "$resultsDir"/*.xml || true; } | head -n1 \
+                    | sed -E 's/^message="//; s/"$//' \
+                    | sed -E 's/&#10;/ /g; s/&#9;/ /g; s/&quot;/"/g; s/&apos;/'"'"'/g; s/&lt;/</g; s/&gt;/>/g; s/&amp;/\&/g' \
+                    | sed -E 's/^org\.opentest4j\.[A-Za-z]+: Multiple Failures \([0-9]+ failure[s]?\) *//' \
+                    | sed -E 's/\|/\\|/g' | tr -s ' ' | cut -c1-200)
+                fi
+                if [ -n "$msg" ]; then
+                  details="$msg ([log]($logUrl))"
+                else
+                  details="[log]($logUrl)"
+                fi
+              fi
+
+              rows="${rows}| ${packageName} | ${iflowName} | ${version} | ${outcome} | ${details} |"$'\n'
+            done
+          fi
+
+          # Render the table only if at least one unit test was run.
+          if [ "$testRan" = "1" ]; then
+            {
+              echo "## Unit test results"
+              echo ""
+              echo "| Package | iFlow | Version | Unit Tests Outcome | Details |"
+              echo "|:---:|:---:|:---:|:---:|:---|"
+              printf '%s' "$rows"
+              echo ""
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          echo "$hadFailure" > /tmp/hadFailure
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: |
+            **/build/reports/tests/**
+            **/build/test-results/**
+          if-no-files-found: warn
+
+      - name: Commit and push changes
+        run: |
+          if [[ $(git status --porcelain) ]]; then
+            git config --local user.email "irt@figaf.com"
+            git config --local user.name "Figaf"
+            git add '**/pipeline-validation.txt'
+            if git diff --cached --quiet; then
+              echo "No pipeline-validation.txt changes to commit"
+            else
+              git commit -m "Update pipeline-validation.txt"
+              git push
+            fi
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Fail job if validations failed
+        if: always()
+        shell: bash
+        run: |
+          if [ "${{ env.FAIL_ON_ERROR }}" = "true" ] && [ "$(cat /tmp/hadFailure 2>/dev/null)" = "1" ]; then
+            echo "::error::One or more Figaf validations failed. See the job summary for the affected iFlows."
+            exit 1
+          fi
+          echo "Validation gate: FAIL_ON_ERROR=${{ env.FAIL_ON_ERROR }}, hadFailure=$(cat /tmp/hadFailure 2>/dev/null)"
