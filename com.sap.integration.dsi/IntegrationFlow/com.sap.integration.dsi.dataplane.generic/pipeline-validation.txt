@@ -1,0 +1,17 @@
+Validation name: CPI Lint
+Execution time: 2026-08-06 13:47:25
+Exit code: 1
+Output: CPILint version 1.1.0, copyright (c) 2019-2025 Morten N. Wittrock
+
+ ________  ________  ___  ___       ___  ________   _________   
+|\   ____\|\   __  \|\  \|\  \     |\  \|\   ___  \|\___   ___\ 
+\ \  \___|\ \  \|\  \ \  \ \  \    \ \  \ \  \ \  \|___ \  \_| 
+ \ \  \    \ \   ____\ \  \ \  \    \ \  \ \  \ \  \   \ \  \  
+  \ \  \____\ \  \___|\ \  \ \  \____\ \  \ \  \ \  \   \ \  \ 
+   \ \_______\ \__\    \ \__\ \_______\ \__\ \__\ \__\   \ \__\
+    \|_______|\|__|     \|__|\|_______|\|__|\|__| \|__|    \|__|
+
+In iflow 'Generic Data Plane Integration Flow' (ID 'com.sap.integration.dsi.dataplane.generic'): Iflow does not have the required description.
+
+Inspecting 1 iflow resulted in 1 issue found.
+
