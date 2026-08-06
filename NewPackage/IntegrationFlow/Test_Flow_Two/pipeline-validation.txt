@@ -1,5 +1,5 @@
 Validation name: CPI Lint
-Execution time: 2026-08-06 22:00:00
+Execution time: 2026-08-06 22:04:13
 Exit code: 0
 Output: CPILint version 1.1.0, copyright (c) 2019-2025 Morten N. Wittrock
 
@@ -14,7 +14,7 @@ Output: CPILint version 1.1.0, copyright (c) 2019-2025 Morten N. Wittrock
 Inspecting 1 iflow resulted in 0 issues found.
 
 Validation name: Unit tests
-Execution time: 2026-08-06 22:00:12
+Execution time: 2026-08-06 22:04:32
 Exit code: 1
 Output: > Task :common:compileJava NO-SOURCE
 > Task :common:compileGroovy UP-TO-DATE
@@ -37,12 +37,24 @@ Output: > Task :common:compileJava NO-SOURCE
 
 > Task :NewPackage:iflow-Test_Flow_Two:test FAILED
 
-GroovyScriptsTest > test_script2Groovy(String) > com.figaf.GroovyScriptsTest.test_script2Groovy(String)[2] FAILED
-    org.opentest4j.MultipleFailuresError at GroovyScriptsTest.groovy:25
-        Caused by: org.opentest4j.AssertionFailedError at GroovyScriptsTest.groovy:25
+GroovyScriptsTest > test_script1Groovy(String) > com.figaf.GroovyScriptsTest.test_script1Groovy(String)[1] FAILED
+    org.opentest4j.MultipleFailuresError at GroovyScriptsTest.groovy:15
+        Caused by: java.lang.AssertionError at GroovyScriptsTest.groovy:15
 
-4 tests completed, 1 failed
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_4-1786053610365.json
+GroovyScriptsTest > test_script1Groovy(String) > com.figaf.GroovyScriptsTest.test_script1Groovy(String)[2] FAILED
+    org.opentest4j.MultipleFailuresError at GroovyScriptsTest.groovy:15
+        Caused by: java.lang.AssertionError at GroovyScriptsTest.groovy:15
+
+GroovyScriptsTest > test_script2Groovy(String) > com.figaf.GroovyScriptsTest.test_script2Groovy(String)[1] FAILED
+    org.opentest4j.MultipleFailuresError at GroovyScriptsTest.groovy:25
+        Caused by: java.lang.AssertionError at GroovyScriptsTest.groovy:25
+
+GroovyScriptsTest > test_script2Groovy(String) > com.figaf.GroovyScriptsTest.test_script2Groovy(String)[2] FAILED
+    org.gradle.internal.exceptions.DefaultMultiCauseException at GroovyScriptsTest.groovy:25
+        Caused by: java.lang.AssertionError at GroovyScriptsTest.groovy:25
+
+4 tests completed, 4 failed
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_4-1786053868268.json
 
 FAILURE: Build failed with an exception.
 
@@ -57,11 +69,18 @@ Execution failed for task ':NewPackage:iflow-Test_Flow_Two:test'.
 
 * Get more help at https://help.gradle.org
 
-BUILD FAILED in 2s
+BUILD FAILED in 4s
 6 actionable tasks: 4 executed, 2 up-to-date
 
 Failure details:
 org.opentest4j.MultipleFailuresError: Multiple Failures (1 failure)
+	java.lang.AssertionError: Property with key 'SAP_InspectModelStepId365' has value 'MessageFlow_4', but 'CallActivity_5' was expected
+org.opentest4j.MultipleFailuresError: Multiple Failures (1 failure)
+	java.lang.AssertionError: Property with key 'SAP_InspectModelStepId347' has value 'MessageFlow_4', but 'CallActivity_5' was expected
+org.opentest4j.MultipleFailuresError: Multiple Failures (1 failure)
+	java.lang.AssertionError: Property with key 'SAP_InspectModelStepId365' has value 'CallActivity_5', but 'CallActivity_7' was expected
+org.gradle.internal.exceptions.DefaultMultiCauseException: Multiple Failures (2 failures)
+	java.lang.AssertionError: Property with key 'SAP_InspectModelStepId347' has value 'CallActivity_5', but 'CallActivity_7' was expected
 	org.opentest4j.AssertionFailedError: 
 Expecting:
  <"messg two three ZZZ success">

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!--
+        Why is the FileAppender wrapped in a SiftingAppender? The FileAppender always
+        creates a log file, even when no messages are logged. Wrapping the FileAppender
+        in a SiftingAppender ensures that a log file is only created if we actually
+        write to it.
+    -->
+    <appender name="SIFT" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>does-not-exist</key>
+            <defaultValue>does-not-matter</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+                <file>cpilint.log</file>
+                <append>false</append>
+                <immediateFlush>true</immediateFlush>
+                <encoder>
+                    <pattern>%d{HH:mm:ss.SSS} %-5level %logger{35} - %msg%n</pattern>
+                </encoder>
+            </appender>
+        </sift>
+    </appender>
+    <!--
+        The log level is set to OFF here, and then programmatically raised to
+        DEBUG if the -debug option is provided on the command line.
+    -->
+    <root level="OFF">
+        <appender-ref ref="SIFT"/>
+    </root>
+</configuration>
