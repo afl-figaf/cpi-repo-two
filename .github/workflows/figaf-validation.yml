@@ -259,7 +259,7 @@ jobs:
           if [[ $(git status --porcelain) ]]; then
             git config --local user.email "irt@figaf.com"
             git config --local user.name "Figaf"
-            git add '**/pipeline-validation.txt'
+            git add .
             if git diff --cached --quiet; then
               echo "No pipeline-validation.txt changes to commit"
             else
