@@ -1,0 +1,6 @@
+#Mon Nov 10 10:01:47 UTC 2025
+Figaf\ Credential\ Name=Figaf_OAuth_Client
+Address=/figaf/jira/updatetransport
+externalTicketIds=
+User\ Role=JiraMessaging.send
+Figaf\ URL=https\://alexf-figaf.cfapps.us10-001.hana.ondemand.com

@@ -1,0 +1,9 @@
+#Mon Nov 10 10:03:14 UTC 2025
+Address=/figaf/jira/updateissue
+Jira\ Configuration\ JSON={     "globalJiraConfig"\:     {         "baseUrl"\: "https\://your-instance.atlassian.net",         "apiTokenCredentialName"\: "JiraApiToken",         "defaultCommentHeader"\: "Figaf Event Update\:"     },     "eventMappings"\:     {         "TRANSPORT_CREATED"\:         {             "enabled"\: true,             "actionType"\: "transitionAndComment",             "transitionDetails"\:             {                 "id"\: "11",                 "fields"\:                 {}             },             "comment"\: "Transport {{technicalTransportId}}."         },         "TRANSPORT_IMPORTED"\:         {             "enabled"\: true,             "actionType"\: "transitionAndComment",             "transitionDetails"\:             {                 "id"\: "11",                 "fields"\:                 {                     "resolution"\:                     {                         "name"\: "Done"                     }                 }             },             "comment"\: "Transport {{technicalTransportId}} imported."         },         "TRANSPORT_APPROVED"\:         {             "enabled"\: true,             "actionType"\: "commentOnly",             "transitionDetails"\:             {                 "id"\: "31",                 "fields"\:                 {}             },             "comment"\: "Transport {{technicalTransportId}} approved."         }     } }
+Jira\ Token\ Credential\ Name=JIRA_ApiService_Credentials
+technicalTransportId=
+{{technicalTransportId=
+User\ Role=ESBMessaging.send
+Figaf\ Base\ URL=https\://alf-figaf.cfapps.us10-001.hana.ondemand.com
+Jira\ Base\ URL=https\://figaf-team.atlassian.net

@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Data Space Integration Script Collection
+Bundle-SymbolicName: com.sap.integration.dsi.dataplane.scripts
+Bundle-Version: 2.3.2
+SAP-BundleType: ScriptCollection
+SAP-NodeType: IFLMAP
+Import-Package: org.osgi.framework
+Import-Service: 
+Provide-Capability: scriptcollection.com.sap.integration.dsi.dataplane.s
+ cripts;version:Version="2.3.2"
+Origin-Bundle-Name: Data Space Integration Script Collection
+Origin-Bundle-SymbolicName: com.sap.integration.dsi.dataplane.scripts
+Origin-Bundle-Version: 2.3.2
+Origin-ModifiedDate: 1784917825753
+SAP-ContentMode: ConfigureOnly
+

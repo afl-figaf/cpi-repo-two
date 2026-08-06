@@ -1,0 +1,30 @@
+# This is a .gitignore template which we recommend to use in your repository. Please rename or copy this file to .gitignore.
+# It is always up to you to decide which files you want to commit to the remote repository and which you want to ignore.
+
+### Project ###
+build
+out
+.gradle
+*.jar
+*.ear
+!gradle/wrapper/gradle-wrapper.jar
+node_modules
+logs
+package-lock.json
+/gradle.properties
+libs
+certificates
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/

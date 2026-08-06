@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://21e18570trial.it-cpitrial05.cfapps.us10-001.hana.ondemand.com/odata/1.0/catalog.svc/">
+  <id>https://21e18570trial.it-cpitrial05.cfapps.us10-001.hana.ondemand.com/odata/1.0/catalog.svc/ContentPackages('FigafJiraIntegration')</id>
+  <title type="text">ContentPackages</title>
+  <updated>2026-08-06T12:22:12.679Z</updated>
+  <category term="ContentPackageModel.ContentPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+  <link href="ContentPackages('FigafJiraIntegration')" rel="edit" title="ContentPackage"/>
+  <link href="ContentPackages('FigafJiraIntegration')/Artifacts" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Artifacts" title="Artifacts" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('FigafJiraIntegration')/Files" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Files" title="Files" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('FigafJiraIntegration')/Urls" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Urls" title="Urls" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('FigafJiraIntegration')/MediaLinks" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/MediaLinks" title="MediaLinks" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('FigafJiraIntegration')/Licenses" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Licenses" title="Licenses" type="application/atom+xml;type=feed"/>
+  <content type="application/xml">
+    <m:properties>
+      <d:TechnicalName>FigafJiraIntegration</d:TechnicalName>
+      <d:DisplayName>Figaf Jira Integration</d:DisplayName>
+      <d:ShortText>The package provides bi-directional communication between Figaf and Jira. It includes highly configurable iFlows processing Figaf webhooks for ticket/transport events to Jira actions, update Figaf based on Jira changes, and a utility for searching issues.</d:ShortText>
+      <d:reg_id>6b4ef2e935a84b9f847a3f93e3030969</d:reg_id>
+      <d:Featured m:null="true"/>
+      <d:Scope m:null="true"/>
+      <d:Description>&lt;p&gt;The "Figaf Jira Integration" package provides a template for integrating Figaf and Jira. It includes highly configurable iFlows processing Figaf webhooks for ticket/transport events to Jira actions, update Figaf based on Jira changes, and a utility for searching issues.&lt;/p&gt; &lt;p&gt;&lt;strong&gt;Features:&lt;/strong&gt;&lt;/p&gt; &lt;ul&gt; &lt;li&gt;&lt;strong&gt;Search Jira Issues&amp;nbsp; &lt;br&gt;&lt;/strong&gt;Utility iFlow for fetching essential data about Jira issues from a specific project. &lt;br&gt; &lt;br&gt;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;Update Jira Issues&lt;/strong&gt; &lt;br&gt; Allows Figaf DevOps events to change status and add comments to Jira issues. &lt;br&gt; &amp;nbsp;&lt;/li&gt; &lt;li&gt;&lt;strong&gt;Update Figaf Transport from Jira&lt;/strong&gt; &lt;br&gt; Allows Jira webhooks to trigger imports of Figaf Transports. &lt;br&gt; &lt;strong&gt;&lt;em&gt;Download the required Proxy from this &lt;/em&gt;&lt;/strong&gt;&lt;a href="https://workdrive.zohopublic.eu/external/108eb522babf927c1828c9df3d40c1a6cb2af9cfe16d0c72a2376c59b12654f1/download" rel="nofollow"&gt;download link&lt;/a&gt;&lt;strong&gt;.&lt;em&gt; &lt;br&gt; &lt;br&gt; &lt;/em&gt;&lt;/strong&gt;&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;You can signup for a free trial at&amp;nbsp;&lt;a href="https://figaf.com/figaf-devops-tool/" rel="nofollow"&gt;Figaf&lt;/a&gt;&amp;nbsp;you can get started in as little as 30 minutes.&amp;nbsp;&lt;/p&gt; &lt;p&gt;The installation guide for the&amp;nbsp;&lt;a href="https://help.figaf.com/portal/en/kb/articles/installation" rel="nofollow"&gt;Figaf Tool is here&lt;/a&gt;.&lt;/p&gt;</d:Description>
+      <d:Version>2510</d:Version>
+      <d:Category>Integration</d:Category>
+      <d:Mode>EDIT_ALLOWED</d:Mode>
+      <d:Vendor>Figaf ApS</d:Vendor>
+      <d:OrgName m:null="true"/>
+      <d:BusinessProcess m:null="true"/>
+      <d:SupportedPlatforms>SAP HANA Cloud Integration</d:SupportedPlatforms>
+      <d:Products>FigafDevOpsTool,AtlassianJira</d:Products>
+      <d:Industries m:null="true"/>
+      <d:LineOfBusiness m:null="true"/>
+      <d:Keywords>ITSM</d:Keywords>
+      <d:Countries m:null="true"/>
+      <d:AvgRating>0.0</d:AvgRating>
+      <d:RatingCount>0</d:RatingCount>
+      <d:PublishedAt m:null="true"/>
+      <d:PublishedBy m:null="true"/>
+      <d:CreatedAt>2026-07-13T07:12:14.123</d:CreatedAt>
+      <d:CreatedBy>afl@figaf.com</d:CreatedBy>
+      <d:ModifiedAt>2026-07-26T23:02:44.824</d:ModifiedAt>
+      <d:ModifiedBy>afl@figaf.com</d:ModifiedBy>
+      <d:PartnerContent m:null="true"/>
+      <d:CertifiedBySap m:null="true"/>
+      <d:CommunityContent m:null="true"/>
+      <d:LicenseType m:null="true"/>
+      <d:SupportInfo>support@figaf.com</d:SupportInfo>
+      <d:AdditionalAttributes m:null="true"/>
+      <d:CommercialContent m:null="true"/>
+      <d:AppCenterTechName m:null="true"/>
+      <d:PartnerCRMBP m:null="true"/>
+      <d:Type m:null="true"/>
+      <d:SubType m:null="true"/>
+      <d:Restricted>false</d:Restricted>
+      <d:OrdId m:null="true"/>
+      <d:AssociatedPackages m:null="true"/>
+    </m:properties>
+  </content>
+</entry>

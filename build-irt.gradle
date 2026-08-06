@@ -1,0 +1,51 @@
+// If you already have your build.gradle, please insert this configuration to the appropriate places.
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+configure(subprojects.findAll()) { sub ->
+
+    apply plugin: 'idea'
+    apply plugin: 'groovy'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    String cpiArtifactType = null
+    if (sub.name.startsWith("iflow-")) {
+        cpiArtifactType = "IFLOW"
+    } else if (sub.name.startsWith("vm-")) {
+        cpiArtifactType = "VALUE_MAPPING"
+    } else if (sub.name.startsWith("sc-")) {
+        cpiArtifactType = "SCRIPT_COLLECTION"
+    } else if (sub.name.startsWith("mm-")) {
+        cpiArtifactType = "MESSAGE_MAPPING"
+    } else if (sub.name.startsWith("fl-")) {
+        cpiArtifactType = "FUNCTION_LIBRARIES"
+    }
+
+    if (cpiArtifactType == "IFLOW") {
+        sourceSets {
+            test {
+                groovy {
+                    srcDirs = ['src/test/groovy', 'src/main/resources/script']
+                }
+            }
+        }
+
+        dependencies {
+            testImplementation project(":common")
+            testImplementation fileTree(dir: 'src/main/resources/lib', include: '*.jar')
+        }
+
+        test {
+            dependsOn ':common:test'
+            useJUnitPlatform()
+        }
+    }
+}

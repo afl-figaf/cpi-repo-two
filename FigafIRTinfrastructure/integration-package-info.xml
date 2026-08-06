@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://21e18570trial.it-cpitrial05.cfapps.us10-001.hana.ondemand.com/odata/1.0/catalog.svc/">
+  <id>https://21e18570trial.it-cpitrial05.cfapps.us10-001.hana.ondemand.com/odata/1.0/catalog.svc/ContentPackages('FigafIRTinfrastructure')</id>
+  <title type="text">ContentPackages</title>
+  <updated>2026-08-06T12:22:12.679Z</updated>
+  <category term="ContentPackageModel.ContentPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+  <link href="ContentPackages('FigafIRTinfrastructure')" rel="edit" title="ContentPackage"/>
+  <link href="ContentPackages('FigafIRTinfrastructure')/Artifacts" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Artifacts" title="Artifacts" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('FigafIRTinfrastructure')/Files" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Files" title="Files" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('FigafIRTinfrastructure')/Urls" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Urls" title="Urls" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('FigafIRTinfrastructure')/MediaLinks" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/MediaLinks" title="MediaLinks" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('FigafIRTinfrastructure')/Licenses" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Licenses" title="Licenses" type="application/atom+xml;type=feed"/>
+  <content type="application/xml">
+    <m:properties>
+      <d:TechnicalName>FigafIRTinfrastructure</d:TechnicalName>
+      <d:DisplayName>Connector for Figaf DevOps Tool</d:DisplayName>
+      <d:ShortText>Test and monitor SAP Integration Suite - Cloud Integration with Figaf DevOps Tool Script collection used for the migration process</d:ShortText>
+      <d:reg_id>e003061ff4e0460e84e0d8a23219e840</d:reg_id>
+      <d:Featured m:null="true"/>
+      <d:Scope m:null="true"/>
+      <d:Description>&lt;p&gt;The package contains iflows that are used with by Figaf DevOps Tool to iflows required to test and monitor SAP Integration Suite - &amp;nbsp;Cloud Integration&lt;/p&gt; &lt;p&gt;Figaf DevOps Tool is a tool to simplify the operation of the SAP Integration Suite.&amp;nbsp;&lt;/p&gt; &lt;ul&gt; &lt;li&gt;It has transport capabilities that simplify the operation, governance, and configuration of objects&lt;/li&gt; &lt;li&gt;Testing of iflows where you can easily create test cases from your iflows. It supports testing with auto-created mock endpoints&lt;/li&gt; &lt;li&gt;Git integration so all iflows are synchronized into the repository making it easier to develop&amp;nbsp;&lt;/li&gt; &lt;li&gt;Alerting and monitoring solutions to help improve the delivery process.&amp;nbsp;&lt;/li&gt; &lt;/ul&gt; &lt;p&gt;&amp;nbsp;The iflows in the package help with the process.&amp;nbsp;&lt;/p&gt; &lt;p&gt;You can signup for a free trial at &lt;a href="https://figaf.com/figaf-devops-tool/" rel="nofollow"&gt;Figaf&lt;/a&gt; you can get started in as little as 30 minutes.&amp;nbsp;&lt;/p&gt; &lt;p&gt;The installation guide for the &lt;a href="https://help.figaf.com/portal/en/kb/articles/installation" rel="nofollow"&gt;Figaf Tool is here&lt;/a&gt;.&lt;/p&gt;</d:Description>
+      <d:Version>2503</d:Version>
+      <d:Category>Integration</d:Category>
+      <d:Mode>READ_ONLY</d:Mode>
+      <d:Vendor>Figaf ApS</d:Vendor>
+      <d:OrgName>FIGAF_APS_PARTNER</d:OrgName>
+      <d:BusinessProcess m:null="true"/>
+      <d:SupportedPlatforms>SAP HANA Cloud Integration</d:SupportedPlatforms>
+      <d:Products>SAPProcessOrchestration,SAPCloudPlatformIntegrationSuite,SAPCloudPlatformIntegration,FigafDevOpsTool,SAPCloudplatfornAPIManagement</d:Products>
+      <d:Industries m:null="true"/>
+      <d:LineOfBusiness m:null="true"/>
+      <d:Keywords>testing,governace,automation,monitoring</d:Keywords>
+      <d:Countries m:null="true"/>
+      <d:AvgRating>0.0</d:AvgRating>
+      <d:RatingCount>0</d:RatingCount>
+      <d:PublishedAt m:null="true"/>
+      <d:PublishedBy m:null="true"/>
+      <d:CreatedAt>2026-07-13T06:55:56.641</d:CreatedAt>
+      <d:CreatedBy>afl@figaf.com</d:CreatedBy>
+      <d:ModifiedAt>2026-07-13T06:55:56.65</d:ModifiedAt>
+      <d:ModifiedBy>afl@figaf.com</d:ModifiedBy>
+      <d:PartnerContent>true</d:PartnerContent>
+      <d:CertifiedBySap>false</d:CertifiedBySap>
+      <d:CommunityContent>false</d:CommunityContent>
+      <d:LicenseType m:null="true"/>
+      <d:SupportInfo>support@figaf.com</d:SupportInfo>
+      <d:AdditionalAttributes m:null="true"/>
+      <d:CommercialContent m:null="true"/>
+      <d:AppCenterTechName m:null="true"/>
+      <d:PartnerCRMBP m:null="true"/>
+      <d:Type m:null="true"/>
+      <d:SubType m:null="true"/>
+      <d:Restricted>false</d:Restricted>
+      <d:OrdId m:null="true"/>
+      <d:AssociatedPackages m:null="true"/>
+    </m:properties>
+  </content>
+</entry>

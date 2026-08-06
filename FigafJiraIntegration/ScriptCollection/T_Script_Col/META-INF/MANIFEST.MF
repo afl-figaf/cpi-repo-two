@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: T_Script_Col
+Bundle-SymbolicName: T_Script_Col
+Bundle-Version: 1.0.0
+SAP-BundleType: ScriptCollection
+SAP-NodeType: IFLMAP
+Import-Package: org.osgi.framework
+Provide-Capability: scriptcollection.T_Script_Col;version:Version="1.0.0
+ "
+Origin-Bundle-Name: T_Script_Col
+Origin-Bundle-SymbolicName: T_Script_Col
+

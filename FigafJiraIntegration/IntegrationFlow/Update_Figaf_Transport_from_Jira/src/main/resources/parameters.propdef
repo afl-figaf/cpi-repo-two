@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><parameters><parameter>
+    <key/>
+    <name>externalTicketIds</name>
+    <type>xsd:string</type>
+    <isRequired>false</isRequired>
+    <constraint/>
+    <description/>
+    <additionalMetadata/>
+  </parameter><parameter>
+    <key/>
+    <name>Figaf URL</name>
+    <type>xsd:string</type>
+    <isRequired>false</isRequired>
+    <constraint/>
+    <description/>
+    <additionalMetadata/>
+  </parameter><parameter>
+    <key/>
+    <name>Figaf Credential Name</name>
+    <type>xsd:string</type>
+    <isRequired>false</isRequired>
+    <constraint/>
+    <description/>
+    <additionalMetadata/>
+  </parameter><parameter>
+    <key/>
+    <name>Address</name>
+    <type>xsd:string</type>
+    <isRequired>false</isRequired>
+    <constraint/>
+    <description/>
+    <additionalMetadata/>
+  </parameter><parameter>
+    <key/>
+    <name>User Role</name>
+    <type>xsd:string</type>
+    <isRequired>false</isRequired>
+    <constraint/>
+    <description/>
+    <additionalMetadata/>
+  </parameter><param_references><reference attribute_category="Figaf_2.Receiver.Auth" attribute_id="ctype::AdapterVariant/cname::HTTP/tp::HTTP/mp::None/direction::Receiver/version::1.16.2/attrId::credentialName" attribute_uilabel="Credential Name" param_key="Figaf Credential Name"/><reference attribute_category="Figaf_2" attribute_id="ctype::AdapterVariant/cname::HTTP/tp::HTTP/mp::None/direction::Receiver/version::1.16.2/attrId::httpAddressWithoutQuery" attribute_uilabel="Address" param_key="Figaf URL"/><reference attribute_category="Figaf_1.Receiver.Auth" attribute_id="ctype::AdapterVariant/cname::HTTP/tp::HTTP/mp::None/direction::Receiver/version::1.16.2/attrId::credentialName" attribute_uilabel="Credential Name" param_key="Figaf Credential Name"/><reference attribute_category="Figaf_1" attribute_id="ctype::AdapterVariant/cname::HTTP/tp::HTTP/mp::None/direction::Receiver/version::1.16.2/attrId::httpAddressWithoutQuery" attribute_uilabel="Address" param_key="Figaf URL"/><reference attribute_category="Jira_Webhook" attribute_id="/attrId::userRole" attribute_uilabel="" param_key="User Role"/><reference attribute_category="Jira_Webhook" attribute_id="/attrId::urlPath" attribute_uilabel="" param_key="Address"/></param_references></parameters>

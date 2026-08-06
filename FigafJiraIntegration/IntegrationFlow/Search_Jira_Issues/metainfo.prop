@@ -1,0 +1,5 @@
+#Store metainfo properties
+#Mon Jul 13 09:07:15 UTC 2026
+description=Get data of essential fields of Jira issues from your project.
+source=FigafDevOpsTool
+target=AtlassianJira

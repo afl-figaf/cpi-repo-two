@@ -1,0 +1,6 @@
+#Mon Nov 10 09:59:27 UTC 2025
+Query\ (JQL)=jql\=project\=DEMO&fields\=key,summary,description,status
+Address=/figaf/jira/searchissues
+Jira\ Credentials\ Name=JIRA_ApiService_Credentials
+Jira\ URL=https\://teamfigaf.atlassian.net
+User\ Role=ESBMessaging.send

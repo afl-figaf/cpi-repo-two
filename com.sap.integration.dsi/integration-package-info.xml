@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='utf-8'?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xml:base="https://21e18570trial.it-cpitrial05.cfapps.us10-001.hana.ondemand.com/odata/1.0/catalog.svc/">
+  <id>https://21e18570trial.it-cpitrial05.cfapps.us10-001.hana.ondemand.com/odata/1.0/catalog.svc/ContentPackages('com.sap.integration.dsi')</id>
+  <title type="text">ContentPackages</title>
+  <updated>2026-08-06T12:22:12.679Z</updated>
+  <category term="ContentPackageModel.ContentPackage" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme"/>
+  <link href="ContentPackages('com.sap.integration.dsi')" rel="edit" title="ContentPackage"/>
+  <link href="ContentPackages('com.sap.integration.dsi')/Artifacts" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Artifacts" title="Artifacts" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('com.sap.integration.dsi')/Files" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Files" title="Files" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('com.sap.integration.dsi')/Urls" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Urls" title="Urls" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('com.sap.integration.dsi')/MediaLinks" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/MediaLinks" title="MediaLinks" type="application/atom+xml;type=feed"/>
+  <link href="ContentPackages('com.sap.integration.dsi')/Licenses" rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Licenses" title="Licenses" type="application/atom+xml;type=feed"/>
+  <content type="application/xml">
+    <m:properties>
+      <d:TechnicalName>com.sap.integration.dsi</d:TechnicalName>
+      <d:DisplayName>SAP Integration Suite - Data Space Integration</d:DisplayName>
+      <d:ShortText>Package covers the generic data plane functionality for Data Space Integration, a capability of SAP Integration Suite.</d:ShortText>
+      <d:reg_id>1ddd9a33f24c486d99e294bc18a53b3c</d:reg_id>
+      <d:Featured m:null="true"/>
+      <d:Scope m:null="true"/>
+      <d:Description>&lt;p&gt;The generic data plane functionality for Data Space Integration(a capability of SAP Integration Suite) is covered by this integration package. It contains the following artifacts:&lt;/p&gt; &lt;ol&gt; &lt;li&gt;&lt;strong&gt;Script collections:&amp;nbsp;&lt;/strong&gt;This artifact encloses groovy scripts for the business logic and exception handling.&lt;/li&gt; &lt;li&gt;&lt;strong&gt;Integration flows:&amp;nbsp;&lt;/strong&gt;This artifact controls the exchange of data between the participants of data spaces.&lt;/li&gt; &lt;/ol&gt;</d:Description>
+      <d:Version>2.0.1</d:Version>
+      <d:Category>Integration</d:Category>
+      <d:Mode>READ_ONLY</d:Mode>
+      <d:Vendor>SAP</d:Vendor>
+      <d:OrgName>Dataspace_Integration</d:OrgName>
+      <d:BusinessProcess m:null="true"/>
+      <d:SupportedPlatforms>SAP HANA Cloud Integration</d:SupportedPlatforms>
+      <d:Products>Amazon,AmazonWebServices</d:Products>
+      <d:Industries m:null="true"/>
+      <d:LineOfBusiness m:null="true"/>
+      <d:Keywords m:null="true"/>
+      <d:Countries m:null="true"/>
+      <d:AvgRating>0.0</d:AvgRating>
+      <d:RatingCount>0</d:RatingCount>
+      <d:PublishedAt m:null="true"/>
+      <d:PublishedBy m:null="true"/>
+      <d:CreatedAt>2026-07-13T08:21:42.595</d:CreatedAt>
+      <d:CreatedBy>afl@figaf.com</d:CreatedBy>
+      <d:ModifiedAt>2026-07-24T20:00:04.533</d:ModifiedAt>
+      <d:ModifiedBy>SYSTEM</d:ModifiedBy>
+      <d:PartnerContent>false</d:PartnerContent>
+      <d:CertifiedBySap>false</d:CertifiedBySap>
+      <d:CommunityContent>false</d:CommunityContent>
+      <d:LicenseType m:null="true"/>
+      <d:SupportInfo>BC-CP-IS-DSI</d:SupportInfo>
+      <d:AdditionalAttributes m:null="true"/>
+      <d:CommercialContent>false</d:CommercialContent>
+      <d:AppCenterTechName m:null="true"/>
+      <d:PartnerCRMBP m:null="true"/>
+      <d:Type m:null="true"/>
+      <d:SubType m:null="true"/>
+      <d:Restricted>false</d:Restricted>
+      <d:OrdId m:null="true"/>
+      <d:AssociatedPackages m:null="true"/>
+    </m:properties>
+  </content>
+</entry>

@@ -1,0 +1,5 @@
+#Store metainfo properties
+#Mon Jul 13 09:07:15 UTC 2026
+description=Allows Jira webhooks to trigger transport imports in Figaf.
+source=AtlassianJira
+target=FigafDevOpsTool
