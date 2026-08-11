@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       run_all:
-        description: 'Run lint + tests on ALL iFlows (not just changed ones)'
+        description: 'Run tests on all iFlows'
         type: boolean
         default: true
 
