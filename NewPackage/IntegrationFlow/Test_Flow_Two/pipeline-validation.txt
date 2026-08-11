@@ -1,20 +1,12 @@
 Validation name: CPI Lint
-Execution time: 2026-08-06 22:04:13
+Execution time: 2026-08-11 04:08:11
 Exit code: 0
 Output: CPILint version 1.1.0, copyright (c) 2019-2025 Morten N. Wittrock
-
- ________  ________  ___  ___       ___  ________   _________   
-|\   ____\|\   __  \|\  \|\  \     |\  \|\   ___  \|\___   ___\ 
-\ \  \___|\ \  \|\  \ \  \ \  \    \ \  \ \  \ \  \|___ \  \_| 
- \ \  \    \ \   ____\ \  \ \  \    \ \  \ \  \ \  \   \ \  \  
-  \ \  \____\ \  \___|\ \  \ \  \____\ \  \ \  \ \  \   \ \  \ 
-   \ \_______\ \__\    \ \__\ \_______\ \__\ \__\ \__\   \ \__\
-    \|_______|\|__|     \|__|\|_______|\|__|\|__| \|__|    \|__|
 
 Inspecting 1 iflow resulted in 0 issues found.
 
 Validation name: Unit tests
-Execution time: 2026-08-06 22:04:32
+Execution time: 2026-08-11 04:08:38
 Exit code: 1
 Output: > Task :common:compileJava NO-SOURCE
 > Task :common:compileGroovy UP-TO-DATE
@@ -54,7 +46,7 @@ GroovyScriptsTest > test_script2Groovy(String) > com.figaf.GroovyScriptsTest.tes
         Caused by: java.lang.AssertionError at GroovyScriptsTest.groovy:25
 
 4 tests completed, 4 failed
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_4-1786053868268.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_4-1786421314805.json
 
 FAILURE: Build failed with an exception.
 
@@ -69,7 +61,7 @@ Execution failed for task ':NewPackage:iflow-Test_Flow_Two:test'.
 
 * Get more help at https://help.gradle.org
 
-BUILD FAILED in 4s
+BUILD FAILED in 3s
 6 actionable tasks: 4 executed, 2 up-to-date
 
 Failure details:
