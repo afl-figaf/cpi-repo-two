@@ -3,11 +3,11 @@ name: Figaf Pipeline
 on:
   push:
     branches:
-      - 'cpi-figaf'
+      - '**'
   workflow_dispatch:
     inputs:
       run_all:
-        description: 'Run CPIlint + tests on all iFlows'
+        description: 'Run lint + tests on ALL iFlows (not just changed ones)'
         type: boolean
         default: true
 
@@ -50,18 +50,12 @@ jobs:
       - name: Get changed IFlow directories
         shell: bash
         run: |
-          # Package roots that hold Integration Suite content. Anything else in the
-          # repo (tooling, cpilint download, common test module) is ignored.
-          packageRoots="FigafIRTinfrastructure FigafJiraIntegration NewPackage com.sap.integration.dsi"
-
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.run_all }}" = "true" ]; then
-            # Manual run: enumerate EVERY iFlow across the known package roots.
+            # Manual run: auto-detect EVERY iFlow in the repo, whatever the package
+            # names are. Matches <Package>/IntegrationFlow/<iFlow> and skips hidden
+            # dirs (.git, .github) so this works unchanged in any Figaf-synced repo.
             echo "Manual run_all dispatch: selecting all iFlows."
-            changedIflowDirs=$(
-              for root in $packageRoots; do
-                [ -d "$root/IntegrationFlow" ] && find "$root/IntegrationFlow" -mindepth 1 -maxdepth 1 -type d
-              done | grep -E '/IntegrationFlow/[^/]+$' | sort | uniq || true
-            )
+            changedIflowDirs=$(find . -mindepth 3 -maxdepth 3 -type d -path './*/IntegrationFlow/*' -not -path './.*' | sed 's#^\./##' | sort | uniq || true)
           else
             # Push (or manual run with run_all=false): only what changed in the last commit.
             changedIflowDirs=$(git diff --name-only --diff-filter=d HEAD^ | grep -E '.*/IntegrationFlow/[^/]+' | awk -F/ '{print $1"/"$2"/"$3}' | sort | uniq || true)
@@ -89,7 +83,7 @@ jobs:
             iflowName="$(basename "$integrationFlowDir")"
             packageName="$(basename "$(dirname "$(dirname "$integrationFlowDir")")")"
 
-            cpilintCommand="${{ github.workspace }}/cpilint-1.1.0/bin/cpilint -rules ${{ github.workspace }}/.github/workflows/cpilint.xml -unpacked-files \"$integrationFlowDir\" -skipvercheck"
+            cpilintCommand="${{ github.workspace }}/cpilint-1.1.0/bin/cpilint -rules ${{ github.workspace }}/.github/workflows/cpilint.xml -unpacked-files \"$integrationFlowDir\" -skipvercheck -boring"
             echo "Executing cpilint: $cpilintCommand"
             cpilintStatus=0
             output=$(eval $cpilintCommand 2>&1) || cpilintStatus=$?
@@ -160,6 +154,16 @@ jobs:
             fi
           done
 
+      - name: Generate test summary page
+        if: always()
+        shell: bash
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_BRANCH: ${{ github.ref_name }}
+          GH_RUN_ID: ${{ github.run_id }}
+          GH_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python3 .github/workflows/generate-test-summary.py
+
       - name: Upload test reports
         id: upload
         if: always()
@@ -167,6 +171,7 @@ jobs:
         with:
           name: test-reports
           path: |
+            test-summary.html
             **/build/reports/tests/**
             **/build/test-results/**
           if-no-files-found: warn
@@ -243,7 +248,7 @@ jobs:
             {
               echo "## Unit test results"
               echo ""
-              echo "Full test report: [download]($reportUrl)"
+              echo "Full test report (all runs): [download]($reportUrl) — open \`test-summary.html\` at the root of the zip for an overview of every iFlow."
               echo ""
               echo "| Package | iFlow | Version | Unit Tests Outcome | Details |"
               echo "|:---:|:---:|:---:|:---:|:---|"
@@ -259,7 +264,7 @@ jobs:
           if [[ $(git status --porcelain) ]]; then
             git config --local user.email "irt@figaf.com"
             git config --local user.name "Figaf"
-            git add .
+            git add '**/pipeline-validation.txt'
             if git diff --cached --quiet; then
               echo "No pipeline-validation.txt changes to commit"
             else
